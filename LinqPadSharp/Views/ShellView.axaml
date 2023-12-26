@@ -1,0 +1,129 @@
+<Window
+    x:Class="LinqPadSharp.Views.ShellView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:LinqPadSharp.ViewModels"
+    Title="LinqPadSharp"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:ShellViewModel"
+    Background="Transparent"
+    ExtendClientAreaToDecorationsHint="True"
+    Icon="/Assets/avalonia-logo.ico"
+    TransparencyLevelHint="AcrylicBlur"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <!--
+            This only sets the DataContext for the previewer in an IDE,
+            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)
+        -->
+        <vm:ShellViewModel />
+    </Design.DataContext>
+    <Panel>
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    MaterialOpacity="0.65"
+                    TintColor="Black"
+                    TintOpacity="1" />
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+        <Grid RowDefinitions="Auto,*">
+            <Menu Grid.Row="0" HorizontalAlignment="Left">
+                <MenuItem Header="File">
+                    <MenuItem Header="New Query" />
+                    <MenuItem Header="Clone Query" />
+                    <MenuItem Header="Open" />
+                    <Separator />
+                    <MenuItem Header="Close" />
+                    <MenuItem Header="Close All Queries" />
+                    <MenuItem Header="Close Untitled Queries (never saved)" />
+                    <Separator />
+                    <MenuItem Header="Save" />
+                    <MenuItem Header="Save As" />
+                    <Separator />
+                    <MenuItem Header="Exit" />
+                    <MenuItem Header="Exit and Shelve Changes" />
+                </MenuItem>
+                <MenuItem Header="Edit">
+                    <MenuItem Header="Undo" />
+                    <MenuItem Header="Redo" />
+                    <Separator />
+                    <MenuItem Header="Cut" />
+                    <MenuItem Header="Paste" />
+                    <MenuItem Header="Paste as Escaped String" />
+                    <Separator />
+                    <MenuItem Header="Select All" />
+                    <Separator />
+                    <MenuItem Header="Find and Replace" />
+                    <MenuItem Header="Find Next" />
+                    <MenuItem Header="Find Previous" />
+                    <MenuItem Header="Go to Line" />
+                    <MenuItem Header="Go to Member" />
+                    <Separator />
+                    <MenuItem Header="Search All Queries" />
+                    <MenuItem Header="Navigate to Query by Name" />
+                </MenuItem>
+                <MenuItem Header="Query">
+                    <MenuItem Header="Execute" />
+                    <MenuItem Header="Cancel" />
+                    <MenuItem Header="Kill Process" />
+                    <MenuItem Header="Kill Process and Execute" />
+                    <Separator />
+                    <MenuItem Header="Show Results" />
+                    <MenuItem Header="Hide Editor" />
+                    <MenuItem Header="Full Screen Results" />
+                    <Separator />
+                    <MenuItem Header="References and Properties" />
+                    <MenuItem Header="NuGet Package Manager" />
+                    <MenuItem Header="Namespace Imports" />
+                </MenuItem>
+                <MenuItem Header="Debug">
+                    <MenuItem Header="Break" />
+                    <MenuItem Header="Start without debugging" />
+                    <Separator />
+                    <MenuItem Header="Step Into" />
+                    <MenuItem Header="Step Over" />
+                    <MenuItem Header="Step Out" />
+                    <Separator />
+                    <MenuItem Header="Run to Cursor" />
+                    <MenuItem Header="Run to Cursor, no breakpoints" />
+                    <MenuItem Header="Set Next Statement" />
+                    <Separator />
+                    <MenuItem Header="Toggle Breakpoint" />
+                    <MenuItem Header="Disable AllBreakpoints" />
+                    <MenuItem Header="Clear All Breakpoints" />
+                </MenuItem>
+                <MenuItem Header="Help">
+                    <MenuItem Header="Report Bug" />
+                    <MenuItem Header="Make Suggestion" />
+                    <Separator />
+                    <MenuItem Header="Check For Updates" />
+                    <MenuItem Header="Manage Activation" />
+                    <MenuItem Header="Remove License" />
+                    <Separator />
+                    <MenuItem Header="About" />
+                </MenuItem>
+            </Menu>
+            <Grid Grid.Row="1" ColumnDefinitions="Auto,*">
+                <Grid Grid.Column="0" RowDefinitions="*,*">
+                    <TreeView Grid.Row="0" />
+                    <Grid Grid.Row="1">
+                        <TreeView>
+                            <TreeViewItem Header="My Queries" />
+                            <TreeViewItem Header="My Extensions" />
+                        </TreeView>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <TabControl />
+                </Grid>
+            </Grid>
+        </Grid>
+    </Panel>
+
+</Window>

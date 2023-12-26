@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace LinqPadSharp.Views
 {
-	public partial class MainWindow : Window
+	public partial class ShellView : Window
 	{
-		public MainWindow()
+		public ShellView()
 		{
 			InitializeComponent();
 		}
