@@ -1,0 +1,85 @@
+<Window
+    x:Class="LinqPadSharp.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:LinqPadSharp.ViewModels"
+    Title="LinqPadSharp"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:MainWindowViewModel"
+    Icon="/Assets/avalonia-logo.ico"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <!--
+            This only sets the DataContext for the previewer in an IDE,
+            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)
+        -->
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Menu>
+                <MenuItem Header="File">
+                    <MenuItem Header="New Query" />
+                    <MenuItem Header="Clone Query" />
+                    <MenuItem Header="Open" />
+                    <Separator />
+                    <MenuItem Header="Close" />
+                    <MenuItem Header="Close All Queries" />
+                    <MenuItem Header="Close Untitled Queries (never saved)" />
+                    <Separator />
+                    <MenuItem Header="Save" />
+                    <MenuItem Header="Save As" />
+                    <Separator />
+                    <MenuItem Header="Exit" />
+                    <MenuItem Header="Exit and Shelve Changes" />
+                </MenuItem>
+                <MenuItem Header="Edit">
+                    <MenuItem Header="Undo" />
+                    <MenuItem Header="Redo" />
+                    <Separator />
+                    <MenuItem Header="Cut" />
+                    <MenuItem Header="Paste" />
+                    <MenuItem Header="Paste as Escaped String" />
+                    <Separator />
+                    <MenuItem Header="Select All" />
+                    <Separator />
+                    <MenuItem Header="Find and Replace" />
+                    <MenuItem Header="Find Next" />
+                    <MenuItem Header="Find Previous" />
+                    <MenuItem Header="Go to Line" />
+                    <MenuItem Header="Go to Member" />
+                    <Separator />
+                    <MenuItem Header="Search All Queries" />
+                    <MenuItem Header="Navigate to Query by Name" />
+                </MenuItem>
+                <MenuItem Header="Query" />
+                <MenuItem Header="Debug" />
+                <MenuItem Header="Help" />
+            </Menu>
+            <TreeView Grid.Row="1" />
+            <Grid Grid.Row="2">
+                <TreeView>
+                    <TreeViewItem Header="My Queries" />
+                    <TreeViewItem Header="My Extensions" />
+                </TreeView>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1">
+            <TabControl />
+        </Grid>
+    </Grid>
+
+</Window>
