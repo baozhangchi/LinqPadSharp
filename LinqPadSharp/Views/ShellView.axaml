@@ -3,7 +3,9 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:linqPadSharp="clr-namespace:LinqPadSharp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:s="https://github.com/sealoyal2018/stylet.avalonia"
     xmlns:vm="using:LinqPadSharp.ViewModels"
     Title="LinqPadSharp"
     d:DesignHeight="450"
@@ -34,20 +36,29 @@
         </ExperimentalAcrylicBorder>
         <Grid RowDefinitions="Auto,*">
             <Menu Grid.Row="0" HorizontalAlignment="Left">
-                <MenuItem Header="File">
-                    <MenuItem Header="New Query" />
-                    <MenuItem Header="Clone Query" />
-                    <MenuItem Header="Open" />
+                <MenuItem Header="File" HotKey="Alt+F">
+                    <MenuItem
+                        Command="{s:Action Method=NewQuery}"
+                        Header="New Query"
+                        HotKey="Ctrl+N" />
+                    <MenuItem Header="Clone Query" HotKey="Ctrl+Shift+N" />
+                    <MenuItem Header="Open" HotKey="Ctrl+O" />
                     <Separator />
-                    <MenuItem Header="Close" />
-                    <MenuItem Header="Close All Queries" />
-                    <MenuItem Header="Close Untitled Queries (never saved)" />
+                    <MenuItem
+                        Command="{s:Action Method=Close}"
+                        Header="Close"
+                        HotKey="Ctrl+W" />
+                    <MenuItem Header="Close All Queries" HotKey="Ctrl+Shift+W" />
+                    <MenuItem Header="Close Untitled Queries (never saved)" HotKey="Alt+Shift+W" />
                     <Separator />
-                    <MenuItem Header="Save" />
-                    <MenuItem Header="Save As" />
+                    <MenuItem Header="Save" HotKey="Ctrl+S" />
+                    <MenuItem Header="Save As" HotKey="Ctrl+Shift+S" />
                     <Separator />
-                    <MenuItem Header="Exit" />
-                    <MenuItem Header="Exit and Shelve Changes" />
+                    <MenuItem
+                        Command="{s:Action Method=Exit}"
+                        Header="Exit"
+                        HotKey="Alt+F4" />
+                    <MenuItem Header="Exit and Shelve Changes" HotKey="Ctrl+Alt+F4" />
                 </MenuItem>
                 <MenuItem Header="Edit">
                     <MenuItem Header="Undo" />
@@ -120,7 +131,36 @@
                     </Grid>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <TabControl />
+                    <TabControl ItemsSource="{Binding Path=Queries}" SelectedItem="{Binding Path=CurrentQuery, Mode=TwoWay}">
+                        <TabControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="14" Text="{Binding Path=Title}" />
+                                    <Button
+                                        Margin="5,0,0,0"
+                                        Padding="0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Background="Transparent"
+                                        Command="{s:Action Method=CloseQuery}"
+                                        CommandParameter="{Binding Path=.}">
+                                        <PathIcon
+                                            Width="10"
+                                            Height="10"
+                                            Data="M335.25 300L442.75 407.25A25 25 0 1 1 407.25 442.75L300 335.25L192.75 442.75A25 25 0 0 1 157.25 407.25L264.75 300L157.25 192.75A25 25 0 0 1 157.25 157.25A25 25 0 0 1 192.75 157.25L300 264.75L407.25 157.25A25 25 0 0 1 442.75 157.25A25 25 0 0 1 442.75 192.75z"
+                                            Foreground="White" />
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </TabControl.ItemTemplate>
+                        <TabControl.ContentTemplate>
+                            <DataTemplate>
+                                <DockPanel LastChildFill="True">
+                                    <linqPadSharp:Editor />
+                                </DockPanel>
+                            </DataTemplate>
+                        </TabControl.ContentTemplate>
+                    </TabControl>
                 </Grid>
             </Grid>
         </Grid>
