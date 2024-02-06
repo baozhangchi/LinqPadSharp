@@ -16,6 +16,7 @@ namespace LinqPadSharp
 		public static AppBuilder BuildAvaloniaApp()
 			=> AppBuilder.Configure<App>()
 				.UsePlatformDetect()
+				.LoadConfig()
 				.WithInterFont()
 				.LogToTrace();
 	}

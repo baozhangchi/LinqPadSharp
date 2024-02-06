@@ -1,16 +1,22 @@
 <Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:LinqPadSharp">
+    xmlns:controls="clr-namespace:LinqPadSharp.Controls"
+    xmlns:markupExtensions="clr-namespace:LinqPadSharp.MarkupExtensions"
+    xmlns:enums="clr-namespace:LinqPadSharp.Models.Enums">
     <Design.PreviewWith>
         <controls:Editor />
     </Design.PreviewWith>
-
     <Style Selector="controls|Editor">
         <!--  Set Defaults  -->
+        <Setter Property="Foreground" Value="White"></Setter>
         <Setter Property="Template">
             <ControlTemplate>
-                <TextBlock Text="Templated Control" />
+                <Grid>
+                    <TextBox
+                             Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Code,Mode=TwoWay}">
+                    </TextBox>
+                </Grid>
             </ControlTemplate>
         </Setter>
     </Style>

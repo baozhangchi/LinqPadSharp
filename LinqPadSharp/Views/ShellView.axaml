@@ -7,6 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/sealoyal2018/stylet.avalonia"
     xmlns:vm="using:LinqPadSharp.ViewModels"
+    xmlns:controls="clr-namespace:LinqPadSharp.Controls"
+    xmlns:markupExtensions="clr-namespace:LinqPadSharp.MarkupExtensions"
+    xmlns:enums="clr-namespace:LinqPadSharp.Models.Enums"
+    xmlns:models="clr-namespace:LinqPadSharp.Models"
     Title="LinqPadSharp"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -134,30 +138,44 @@
                     <TabControl ItemsSource="{Binding Path=Queries}" SelectedItem="{Binding Path=CurrentQuery, Mode=TwoWay}">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontSize="14" Text="{Binding Path=Title}" />
-                                    <Button
-                                        Margin="5,0,0,0"
-                                        Padding="0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Background="Transparent"
-                                        Command="{s:Action Method=CloseQuery}"
-                                        CommandParameter="{Binding Path=.}">
-                                        <PathIcon
-                                            Width="10"
-                                            Height="10"
-                                            Data="M335.25 300L442.75 407.25A25 25 0 1 1 407.25 442.75L300 335.25L192.75 442.75A25 25 0 0 1 157.25 407.25L264.75 300L157.25 192.75A25 25 0 0 1 157.25 157.25A25 25 0 0 1 192.75 157.25L300 264.75L407.25 157.25A25 25 0 0 1 442.75 157.25A25 25 0 0 1 442.75 192.75z"
-                                            Foreground="White" />
-                                    </Button>
-                                </StackPanel>
+                                <TextBlock FontSize="14" Text="{Binding Path=Title}" />
                             </DataTemplate>
                         </TabControl.ItemTemplate>
                         <TabControl.ContentTemplate>
-                            <DataTemplate>
-                                <DockPanel LastChildFill="True">
-                                    <linqPadSharp:Editor />
-                                </DockPanel>
+                            <DataTemplate x:DataType="{x:Type models:Query}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Content="运行"></Button>
+                                        <Label Grid.Column="1" Content="Language"></Label>
+                                        <ComboBox Grid.Column="2" ItemsSource="{markupExtensions:EnumSource EnumType=enums:Language}" SelectedItem="{Binding Path=Language,Mode=TwoWay}"></ComboBox>
+                                        <Label Content=".Net" Grid.Column="3"></Label>
+                                        <ComboBox ItemsSource="{markupExtensions:EnumSource EnumType=enums:DotnetVersion}" Grid.Column="4" SelectedItem="{Binding Path=DotnetVersion,Mode=TwoWay}"></ComboBox>
+                                        <Button Grid.Column="5"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Center"
+                                            Background="Transparent"
+                                            Command="{s:Action Method=CloseQuery,ActionNotFound=Throw}"
+                                            CommandParameter="{Binding Path=.}">
+                                            <PathIcon
+                                                Width="10"
+                                                Height="10"
+                                                Data="M335.25 300L442.75 407.25A25 25 0 1 1 407.25 442.75L300 335.25L192.75 442.75A25 25 0 0 1 157.25 407.25L264.75 300L157.25 192.75A25 25 0 0 1 157.25 157.25A25 25 0 0 1 192.75 157.25L300 264.75L407.25 157.25A25 25 0 0 1 442.75 157.25A25 25 0 0 1 442.75 192.75z"
+                                                Foreground="White" />
+                                        </Button>
+                                    </Grid>
+                                    <controls:Editor Grid.Row="1" /></Grid>
                             </DataTemplate>
                         </TabControl.ContentTemplate>
                     </TabControl>

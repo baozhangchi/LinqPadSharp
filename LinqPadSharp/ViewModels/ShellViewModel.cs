@@ -45,7 +45,7 @@ public class ShellViewModel : ViewModelBase
         CurrentQuery = Queries.Last();
     }
 
-    public void Close()
+    public void CloseQuery(Query query)
     {
         var index = Queries.IndexOf(CurrentQuery!);
         Queries.RemoveAt(index);
@@ -53,17 +53,5 @@ public class ShellViewModel : ViewModelBase
             NewQuery();
         else
             CurrentQuery = index == 0 ? Queries.First() : Queries[index - 1];
-    }
-
-    public void CloseQuery(Query query)
-    {
-        if (query.Equals(CurrentQuery))
-        {
-            Close();
-            return;
-        }
-
-        Queries.Remove(query);
-        if (Queries.Count == 0) NewQuery();
     }
 }
