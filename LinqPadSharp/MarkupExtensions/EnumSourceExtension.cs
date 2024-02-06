@@ -28,11 +28,11 @@ public class EnumSourceExtension : MarkupExtension
         }
     }
 
-    public override object? ProvideValue(IServiceProvider serviceProvider)
+    public override object ProvideValue(IServiceProvider serviceProvider)
     {
         if (_enumType == null)
         {
-            return default;
+            return default!;
         }
 
         if (serviceProvider.GetService(typeof(IProvideValueTarget)) is IProvideValueTarget service)

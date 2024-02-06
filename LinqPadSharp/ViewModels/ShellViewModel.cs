@@ -45,6 +45,11 @@ public class ShellViewModel : ViewModelBase
         CurrentQuery = Queries.Last();
     }
 
+    public void Run(Query query)
+    {
+
+    }
+
     public void CloseQuery(Query query)
     {
         var index = Queries.IndexOf(CurrentQuery!);

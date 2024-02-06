@@ -2,15 +2,15 @@
     x:Class="LinqPadSharp.Views.ShellView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:LinqPadSharp.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enums="clr-namespace:LinqPadSharp.Models.Enums"
     xmlns:linqPadSharp="clr-namespace:LinqPadSharp"
+    xmlns:markupExtensions="clr-namespace:LinqPadSharp.MarkupExtensions"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:LinqPadSharp.Models"
     xmlns:s="https://github.com/sealoyal2018/stylet.avalonia"
     xmlns:vm="using:LinqPadSharp.ViewModels"
-    xmlns:controls="clr-namespace:LinqPadSharp.Controls"
-    xmlns:markupExtensions="clr-namespace:LinqPadSharp.MarkupExtensions"
-    xmlns:enums="clr-namespace:LinqPadSharp.Models.Enums"
-    xmlns:models="clr-namespace:LinqPadSharp.Models"
     Title="LinqPadSharp"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -145,28 +145,39 @@
                             <DataTemplate x:DataType="{x:Type models:Query}">
                                 <Grid>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto" />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
-                                        <Button Content="运行"></Button>
-                                        <Label Grid.Column="1" Content="Language"></Label>
-                                        <ComboBox Grid.Column="2" ItemsSource="{markupExtensions:EnumSource EnumType=enums:Language}" SelectedItem="{Binding Path=Language,Mode=TwoWay}"></ComboBox>
-                                        <Label Content=".Net" Grid.Column="3"></Label>
-                                        <ComboBox ItemsSource="{markupExtensions:EnumSource EnumType=enums:DotnetVersion}" Grid.Column="4" SelectedItem="{Binding Path=DotnetVersion,Mode=TwoWay}"></ComboBox>
-                                        <Button Grid.Column="5"
+                                        <Button
+                                            Command="{s:Action Method=Run}"
+                                            CommandParameter="{Binding Path=.}"
+                                            Content="运行" />
+                                        <Label Grid.Column="1" Content="Language" />
+                                        <ComboBox
+                                            Grid.Column="2"
+                                            ItemsSource="{markupExtensions:EnumSource EnumType=enums:Language}"
+                                            SelectedItem="{Binding Path=Language, Mode=TwoWay}" />
+                                        <Label Grid.Column="3" Content=".Net" />
+                                        <ComboBox
+                                            Grid.Column="4"
+                                            ItemsSource="{markupExtensions:EnumSource EnumType=enums:DotnetVersion}"
+                                            SelectedItem="{Binding Path=DotnetVersion, Mode=TwoWay}" />
+                                        <Button
+                                            Grid.Column="5"
                                             HorizontalAlignment="Right"
                                             VerticalAlignment="Center"
                                             Background="Transparent"
-                                            Command="{s:Action Method=CloseQuery,ActionNotFound=Throw}"
+                                            Command="{s:Action Method=CloseQuery,
+                                                               ActionNotFound=Throw}"
                                             CommandParameter="{Binding Path=.}">
                                             <PathIcon
                                                 Width="10"
@@ -175,7 +186,8 @@
                                                 Foreground="White" />
                                         </Button>
                                     </Grid>
-                                    <controls:Editor Grid.Row="1" /></Grid>
+                                    <controls:Editor Grid.Row="1" />
+                                </Grid>
                             </DataTemplate>
                         </TabControl.ContentTemplate>
                     </TabControl>
