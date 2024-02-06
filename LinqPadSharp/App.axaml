@@ -7,7 +7,8 @@
 
     <Application.Styles>
         <FluentTheme />
-        <StyleInclude Source="avares://LinqPadSharp/Controls/Editor.axaml"></StyleInclude>
+        <StyleInclude Source="avares://AvaloniaEdit/Themes/Fluent/AvaloniaEdit.xaml" />
+        <StyleInclude Source="avares://LinqPadSharp/Controls/Editor.axaml" />
         <Style Selector="TabItem">
             <Setter Property="MinHeight" Value="30" />
         </Style>
@@ -16,7 +17,7 @@
             <Setter Property="Background" Value="Transparent" />
         </Style>
         <Style Selector="Label">
-            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </Application.Styles>
 </Application>

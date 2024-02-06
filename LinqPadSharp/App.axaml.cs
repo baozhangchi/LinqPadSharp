@@ -8,7 +8,7 @@ using Stylet;
 
 namespace LinqPadSharp;
 
-public class App : StyletApplication<ShellViewModel>
+public class App : Stylet.StyletApplication<ShellViewModel>
 {
     public override void Initialize()
     {
