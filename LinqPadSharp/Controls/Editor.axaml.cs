@@ -1,10 +1,11 @@
+using System;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
+using Avalonia.Data;
 using Avalonia.Interactivity;
-using Avalonia.Media;
 using AvaloniaEdit;
 using AvaloniaEdit.TextMate;
 using LinqPadSharp.Models.Enums;
@@ -15,13 +16,8 @@ namespace LinqPadSharp.Controls;
 
 public class Editor : TemplatedControl
 {
-    public override void Render(DrawingContext context)
-    {
-        base.Render(context);
-    }
-
     public static readonly StyledProperty<string> CodeProperty = AvaloniaProperty.Register<Editor, string>(
-        "Code");
+        "Code",defaultValue:default,defaultBindingMode: BindingMode.TwoWay);
 
     public string Code
     {
@@ -38,8 +34,11 @@ public class Editor : TemplatedControl
         set => SetValue(LanguageProperty, value);
     }
 
-    public static readonly StyledProperty<DotnetVersion> DotnetVersionProperty = AvaloniaProperty.Register<Editor, DotnetVersion>(
-        "DotnetVersion");
+    public static readonly StyledProperty<DotnetVersion> DotnetVersionProperty =
+        AvaloniaProperty.Register<Editor, DotnetVersion>(
+            "DotnetVersion");
+
+    private bool _isUpdating;
 
     public DotnetVersion DotnetVersion
     {
@@ -51,15 +50,23 @@ public class Editor : TemplatedControl
     {
         base.OnApplyTemplate(e);
         var textEditor = this.GetTemplateChildren().FirstOrDefault(x => x is TextEditor) as TextEditor;
-        var registryOptions = new RegistryOptions(ThemeName.Dark);
+        var registryOptions = new RegistryOptions(ThemeName.Light);
         var textMateInstallation = textEditor.InstallTextMate(registryOptions);
-        textMateInstallation.SetGrammar(registryOptions.GetScopeByLanguageId(registryOptions.GetLanguageByExtension(".cs").Id));
+        textMateInstallation.SetGrammar(
+            registryOptions.GetScopeByLanguageId(registryOptions.GetLanguageByExtension(".cs").Id));
+        textEditor!.TextChanged += TextEditorTextChanged;
     }
 
-    protected override void OnLoaded(RoutedEventArgs e)
+    private void TextEditorTextChanged(object? sender, EventArgs e)
     {
-        base.OnLoaded(e);
-
-
+        if (sender is TextEditor textEditor)
+        {
+            _isUpdating = true;
+            Code = textEditor.Text;
+            _isUpdating = false;
+            CodeChanged?.Invoke(this, Code);
+        }
     }
+
+    public EventHandler<string>? CodeChanged;
 }

@@ -5,7 +5,6 @@
     xmlns:controls="clr-namespace:LinqPadSharp.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:enums="clr-namespace:LinqPadSharp.Models.Enums"
-    xmlns:linqPadSharp="clr-namespace:LinqPadSharp"
     xmlns:markupExtensions="clr-namespace:LinqPadSharp.MarkupExtensions"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:LinqPadSharp.Models"
@@ -34,7 +33,7 @@
                 <ExperimentalAcrylicMaterial
                     BackgroundSource="Digger"
                     MaterialOpacity="0.65"
-                    TintColor="Black"
+                    TintColor="White"
                     TintOpacity="1" />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
@@ -135,7 +134,8 @@
                     </Grid>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <TabControl ItemsSource="{Binding Path=Queries}" SelectedItem="{Binding Path=CurrentQuery, Mode=TwoWay}">
+                    <TabControl ItemsSource="{Binding Path=Queries}"
+                                SelectedItem="{Binding Path=CurrentQuery, Mode=TwoWay}">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock FontSize="14" Text="{Binding Path=Title}" />
@@ -182,11 +182,11 @@
                                             <PathIcon
                                                 Width="10"
                                                 Height="10"
-                                                Data="M335.25 300L442.75 407.25A25 25 0 1 1 407.25 442.75L300 335.25L192.75 442.75A25 25 0 0 1 157.25 407.25L264.75 300L157.25 192.75A25 25 0 0 1 157.25 157.25A25 25 0 0 1 192.75 157.25L300 264.75L407.25 157.25A25 25 0 0 1 442.75 157.25A25 25 0 0 1 442.75 192.75z"
-                                                Foreground="White" />
+                                                Data="M335.25 300L442.75 407.25A25 25 0 1 1 407.25 442.75L300 335.25L192.75 442.75A25 25 0 0 1 157.25 407.25L264.75 300L157.25 192.75A25 25 0 0 1 157.25 157.25A25 25 0 0 1 192.75 157.25L300 264.75L407.25 157.25A25 25 0 0 1 442.75 157.25A25 25 0 0 1 442.75 192.75z" />
                                         </Button>
                                     </Grid>
-                                    <controls:Editor Grid.Row="1" />
+                                    <controls:Editor Grid.Row="1" BorderThickness="1"
+                                                     BorderBrush="{StaticResource TextControlBorderBrush}" />
                                 </Grid>
                             </DataTemplate>
                         </TabControl.ContentTemplate>
